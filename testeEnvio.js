@@ -4,22 +4,21 @@ const nodemailer = require('nodemailer');
 const enviarEmailTeste = async () => {
   try {
     const transporter = nodemailer.createTransport({
-        host: 'smtp.azurecomm.net',
+        host: 'smtp.gmail.com',
         port: 587,
         secure: false, // false para TLS (STARTTLS)
         auth: {
-          type: "OAuth2",
-          user: "wellington_savioli@hotmail.com", // Seu e-mail do Hotmail
-          pass: "ogxhuovkvzafavld", // Sua senha do Hotmail
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
         },
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_USER, // Seu e-mail do Yahoo
-      to: 'destinatario@email.com', // Substitua pelo e-mail de teste
-      subject: 'Teste de envio com Yahoo Mail',
-      text: 'Este é um e-mail de teste enviado via Nodemailer e Yahoo Mail.',
-      html: '<p>Este é um <b>e-mail de teste</b> enviado via Nodemailer e Yahoo Mail.</p>',
+      from: process.env.SMTP_PASS, // Seu e-mail
+      to: 'wsavioli@hotmail.com', // Substitua pelo e-mail de teste
+      subject: 'Teste de envio com GMAIL',
+      text: 'Este é um e-mail de teste enviado via Nodemailer para GMAIL.',
+      html: '<p>Este é um <b>e-mail de teste</b> enviado via Nodemailer para GMAIL.</p>',
     };
 
     const info = await transporter.sendMail(mailOptions);
