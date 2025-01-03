@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Usuario = require('../models/Usuario');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
@@ -45,10 +46,13 @@ exports.recuperarSenha = async (req, res) => {
 
     // Configurar o transporte de e-mail
     const transporter = nodemailer.createTransport({
-      service: 'hotmail', // Ou o serviço de e-mail que você está usando
+      service: 'gmail', // gmail é o mais fácil
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // false para TLS (STARTTLS)
       auth: {
-        user: process.env.EMAIL_USER, // Seu e-mail
-        pass: process.env.EMAIL_PASS, // Sua senha ou App Password
+        user: process.env.SMTP_USER, // Seu e-mail
+        pass: process.env.SMTP_PASS, // Sua senha ou App Password
       },
     });
 
@@ -57,8 +61,9 @@ exports.recuperarSenha = async (req, res) => {
 
     // Configurar o e-mail
     const mailOptions = {
-      from: process.env.EMAIL_USER, // Remetente
-      to: email, // Destinatário
+      from: process.env.SMTP_USER, // Remetente
+      to: email, //Destinatário
+      //to: 'fidorid914@gholar.com',
       subject: 'Recuperação de Senha',
       html: `<p>Olá,</p>
               <p>Você solicitou a redefinição de sua senha. Clique no link abaixo para redefinir:</p>
