@@ -4,13 +4,13 @@ const nodemailer = require('nodemailer');
 const enviarEmailTeste = async () => {
   try {
     const transporter = nodemailer.createTransport({
-        host: 'smtp-mail.outlook.com',
+        host: 'smtp.azurecomm.net',
         port: 587,
         secure: false, // false para TLS (STARTTLS)
         auth: {
           type: "OAuth2",
           user: "wellington_savioli@hotmail.com", // Seu e-mail do Hotmail
-          pass: "briGHT1590", // Sua senha do Hotmail
+          pass: "ogxhuovkvzafavld", // Sua senha do Hotmail
         },
     });
 
