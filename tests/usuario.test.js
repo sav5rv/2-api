@@ -16,7 +16,7 @@ describe('Testes para a API de Usuários', () => {
   let userId;
 
   test('Deve criar um novo usuário', async () => {
-    const response = await request(app).post('/usuarios').send({
+    const response = await request(app).post('/').send({
       nome: 'Teste',
       email: 'teste@example.com',
       senha: 'senha123',

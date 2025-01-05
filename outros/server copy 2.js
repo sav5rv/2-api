@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
-const connectDatabase = require('./config/db');
+const mongoose = require('mongoose');
 const logger = require('./middlewares/logger'); // Importa o middleware
 
 const app = express();
@@ -10,8 +10,11 @@ const app = express();
 app.use(express.json());
 app.use(logger); // Usa o middleware de logger
 
-//chama a função que está em /config/db para conectar ao Bc Dados
-connectDatabase();
+
+// Conexão com MongoDB
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Conectado ao MongoDB"))
+  .catch(err => console.error("Erro ao conectar ao MongoDB", err));
 
 // Importar rotas
 const usuarioRoutes = require('./routes/usuarios');
@@ -21,9 +24,5 @@ app.use('/usuarios', usuarioRoutes);
 app.use('/acessos', acessoRoutes);
 
 // Iniciar servidor
-if (process.env.NODE_ENV !== 'test') {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
-}
-
-module.exports = app; // Exporta o app para testes
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

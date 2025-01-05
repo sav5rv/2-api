@@ -28,7 +28,14 @@ exports.registrarAcesso = async (req, res) => {
 
         // Registra acesso com sucesso
         await Acesso.create({ usuarioId: usuario._id, sucesso: true, ip, maquina });
-        res.status(200).json({ mensagem: 'Acesso bem-sucedido!', usuario: usuario.nome });
+        
+        // Retorna mensagem e URL para redirecionamento
+        const pagina = '/pagina-principal'; // Substitua pelo caminho da sua página
+        res.status(200).json({
+            mensagem: 'Acesso bem-sucedido!',
+            usuario: usuario.nome,
+            redirecionarPara: pagina,
+        });
     } catch (err) {
         res.status(500).json({ erro: 'Erro ao registrar acesso', detalhes: err.message });
     }
