@@ -7,11 +7,58 @@ const jwt = require('jsonwebtoken');
 exports.cadastrarUsuario = async (req, res) => {
   try {
     const { nome, email, senha } = req.body;
-    const usuario = new Usuario({ nome, email, senha });
-    await usuario.save();
-    res.status(201).json({ mensagem: 'Usuário criado com sucesso!' });
+    const novoUsuario = new Usuario({ nome, email, senha });
+    await novoUsuario.save();
+    res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso!', usuario: novoUsuario });
   } catch (err) {
-    res.status(400).json({ erro: 'Erro ao criar usuário', detalhes: err.message });
+    res.status(400).json({ erro: 'Erro ao cadastrar usuário', detalhes: err.message });
+  }
+};
+
+exports.listarUsuarios = async (req, res) => {
+  try {
+    const usuarios = await Usuario.find();
+    res.status(200).json(usuarios);
+  } catch (err) {
+    res.status(400).json({ erro: 'Erro ao listar usuários', detalhes: err.message });
+  }
+};
+
+exports.obterUsuarioPorId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const usuario = await Usuario.findById(id);
+    if (!usuario) return res.status(404).json({ erro: 'Usuário não encontrado' });
+    res.status(200).json(usuario);
+  } catch (err) {
+    res.status(400).json({ erro: 'Erro ao obter usuário', detalhes: err.message });
+  }
+};
+
+exports.atualizarUsuario = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nome, email, senha } = req.body;
+    const usuario = await Usuario.findByIdAndUpdate(
+      id,
+      { nome, email, senha },
+      { new: true, runValidators: true }
+    );
+    if (!usuario) return res.status(404).json({ erro: 'Usuário não encontrado' });
+    res.status(200).json({ mensagem: 'Usuário atualizado com sucesso!', usuario });
+  } catch (err) {
+    res.status(400).json({ erro: 'Erro ao atualizar usuário', detalhes: err.message });
+  }
+};
+
+exports.removerUsuario = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const usuario = await Usuario.findByIdAndDelete(id);
+    if (!usuario) return res.status(404).json({ erro: 'Usuário não encontrado' });
+    res.status(200).json({ mensagem: 'Usuário removido com sucesso!' });
+  } catch (err) {
+    res.status(400).json({ erro: 'Erro ao remover usuário', detalhes: err.message });
   }
 };
 

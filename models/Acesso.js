@@ -6,6 +6,8 @@ const acessoSchema = new mongoose.Schema({
   sucesso: { type: Boolean, default: true },
   ip: { type: String, required: true },
   maquina: { type: String, required: true },
-}, { timestamps: true });
+},
+ { timestamps: true }
+);
 
 module.exports = mongoose.model('Acesso', acessoSchema);

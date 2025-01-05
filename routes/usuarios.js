@@ -1,15 +1,19 @@
 const express = require('express');
-const { cadastrarUsuario, trocarSenha } = require('../controllers/usuarioController');
-const { recuperarSenha, redefinirSenha } = require('../controllers/usuarioController');
+const router = express.Router();
 const autenticar_jwt = require('../middlewares/autenticar');
 
-const router = express.Router();
-
-router.post('/', cadastrarUsuario); //Criar um novo usuário
-router.put('/:id/senha', trocarSenha); //Trocar a senha de um usuário
+const usuContr = require('../controllers/usuarioController');
 
 // Rota para recuperação de senha
-router.post('/recuperar-senha', recuperarSenha);
-router.post('/redefinir-senha', autenticar_jwt, redefinirSenha);
+router.put('/:id/senha', usuContr.trocarSenha); //Trocar a senha de um usuário
+router.post('/recuperar-senha', usuContr.recuperarSenha);
+router.post('/redefinir-senha', autenticar_jwt, usuContr.redefinirSenha);
+
+// Endpoints para CRUD de usuários
+router.post('/cadastrar', usuContr.cadastrarUsuario);
+router.get('/listar', usuContr.listarUsuarios);
+router.get('/:id', usuContr.obterUsuarioPorId);
+router.put('/atualizar/:id', usuContr.atualizarUsuario);
+router.delete('/:id', usuContr.removerUsuario);
 
 module.exports = router;

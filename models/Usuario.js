@@ -6,9 +6,12 @@ const usuarioSchema = new mongoose.Schema({
   email: { type: String, unique: true, required: true },
   senha: { type: String, required: true },
   status: { type: String, default: 'ativo' },
-}, { timestamps: true });
+  perfil: { type: String, default: 'usuario'},
+},
+ { timestamps: true }
+);
 
-// Middleware para hash de senha
+// Middleware para hash de senha antes de salvar
 usuarioSchema.pre('save', async function(next) {
   if (!this.isModified('senha')) return next();
   this.senha = await bcrypt.hash(this.senha, 10);
