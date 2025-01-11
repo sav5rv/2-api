@@ -2,6 +2,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
+const cors = require('cors');
 const express = require('express');
 const connectDatabase = require('./config/db');
 const logger = require('./middlewares/logger'); // Importa o middleware
@@ -11,6 +12,7 @@ const app = express();
 // Middlewares globais
 app.use(express.json());
 app.use(logger); // Usa o middleware de logger
+app.use(cors());
 
 //chama a função que está em /config/db para conectar ao Bc Dados
 connectDatabase();

@@ -1,3 +1,8 @@
+nvm = 1.2.1
+node = 18.20.5
+npm = 10.8.2
+phyton = 312 - não está rodando no prompt
+
 Aqui está a estrutura completa e detalhada do projeto até o momento. Incluí todos os diretórios, arquivos, e uma breve descrição do conteúdo de cada um.
 
 ---
