@@ -3,9 +3,10 @@ const router = express.Router();
 const autenticar_jwt = require('../middlewares/autenticar');
 
 const usuContr = require('../controllers/usuarioController');
+const acessoContr = require('../controllers/acessoController');
 
 // Rota para logar usuario
-router.post('/login', usuContr.login);
+router.post('/login', acessoContr.registrarAcesso, autenticar_jwt, usuContr.login);
 
 // Rota para recuperação de senha
 router.put('/:id/senha', usuContr.trocarSenha); //Trocar a senha de um usuário

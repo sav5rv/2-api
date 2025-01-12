@@ -1,7 +1,8 @@
+//require('dotenv').config();
+require('dotenv').config({ path: '../.env' }) //o arquivo .js não está na mesma pasta que o .env
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 
-const id = '677ac805d347b4384ebc3857';
+const id = '67831a8b98c1235660479d75';
 
  // Gerar o token JWT
     const token = jwt.sign({ id }, process.env.SECRET_KEY, { expiresIn: '1h' });
