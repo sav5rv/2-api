@@ -4,6 +4,9 @@ const autenticar_jwt = require('../middlewares/autenticar');
 
 const usuContr = require('../controllers/usuarioController');
 
+// Rota para logar usuario
+router.post('/login', usuContr.login);
+
 // Rota para recuperação de senha
 router.put('/:id/senha', usuContr.trocarSenha); //Trocar a senha de um usuário
 router.post('/recuperar-senha', usuContr.recuperarSenha);

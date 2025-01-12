@@ -4,6 +4,31 @@ const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+exports.login = async (req, res) => {
+    const { email, senha } = req.body;
+
+    try {
+        // Verificar se o usuário existe
+        const usuario = await Usuario.findOne({ email });
+        if (!usuario) {
+            return res.status(401).json({ mensagem: 'Credenciais inválidas.' });
+        }
+
+        // Verificar senha
+        const senhaValida = await bcrypt.compare(senha, usuario.senha);
+        if (!senhaValida) {
+            return res.status(401).json({ mensagem: 'Credenciais inválidas.' });
+        }
+
+        // Gerar token JWT
+        const token = jwt.sign({ id: usuario._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ token, mensagem: 'Login bem-sucedido.' });
+    } catch (err) {
+        res.status(500).json({ mensagem: 'Erro ao realizar login.', erro: err.message });
+    }
+};
+
+
 exports.cadastrarUsuario = async (req, res) => {
   try {
     const { nome, email, senha } = req.body;
