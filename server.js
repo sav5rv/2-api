@@ -2,21 +2,14 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-
-const app = require('./config/app.js');
-const mongoose = require('./config/db.js');
+const db = require('./config/db');
+const app = require('./config/app');
 
 //chama a função que está em /config/db para conectar ao Bc Dados
-app();
-mongoose();
-
+db.connectDatabase();
 
 // Iniciar servidor
 if (process.env.NODE_ENV !== 'test') {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`Acessar http://localhost:${PORT}`);    
-    console.log(`Servidor rodando na porta ${PORT}`);
-  });
-}
-
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+  }

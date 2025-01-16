@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
 const connectDatabase = async () => {
@@ -11,9 +12,8 @@ const connectDatabase = async () => {
     console.log(`Conectado ao banco de dados: ${dbURL}`);
   } catch (error) {
     console.error('Erro ao conectar ao banco de dados:', error.message);
-    process.exit(1);
+    process.exit(1); // Encerra o processo em caso de falha
   }
 };
 
-module.exports = mongoose;
-
+module.exports = { connectDatabase };
