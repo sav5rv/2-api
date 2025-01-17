@@ -1,0 +1,76 @@
+[
+  {
+    "_id": "67773663b006c1c3e64e292c",
+    "nome": "João Silva",
+    "email": "joao@example.com",
+    "senha": "$2b$10$9qF5lP1IdLoquCjzJtT0uOkP0s/LvKugpILD22TlF3eq9Io6gb02e",
+    "status": "ativo",
+    "createdAt": "2025-01-03T00:59:15.297Z",
+    "updatedAt": "2025-01-03T13:08:08.409Z",
+    "__v": 0
+  },
+  {
+    "_id": "67773fec1ba4472ed269b30c",
+    "nome": "Ana de João Silva",
+    "email": "wsavioli@hotmail.com",
+    "senha": "$2b$10$2am.xkRYGRPwhZ7KsC6xSek1reStJ9VPeuYIPT0BtTOkf4D0VpO1O",
+    "status": "ativo",
+    "createdAt": "2025-01-03T01:39:56.334Z",
+    "updatedAt": "2025-01-03T01:39:56.334Z",
+    "__v": 0
+  },
+  {
+    "_id": "677740061ba4472ed269b30e",
+    "nome": "Filicia de João Silva",
+    "email": "nitera5969@sfxeur.com",
+    "senha": "$2b$10$Z35pmmKHYhjwuBBC5mXP2e574v7uPuQaj0QfnZyX2N.DsY7oCDIZq",
+    "status": "ativo",
+    "createdAt": "2025-01-03T01:40:22.791Z",
+    "updatedAt": "2025-01-03T19:40:39.516Z",
+    "__v": 0
+  },
+  {
+    "_id": "677abd9cc9321473ca30cbea",
+    "nome": "Filicia de João Silva",
+    "email": "filicia@example.com",
+    "senha": "$2b$10$RB5y3kznGyvFx2z91KS2EuNJHfjqHQ/m/2Lm.iz3F1Icv2GP436U6",
+    "status": "ativo",
+    "perfil": "usuario",
+    "createdAt": "2025-01-05T17:13:00.217Z",
+    "updatedAt": "2025-01-05T17:13:00.217Z",
+    "__v": 0
+  },
+  {
+    "_id": "677abdd2c9321473ca30cbee",
+    "nome": "Filicia de Carvalho de João Silva",
+    "email": "carvalho@example.com",
+    "senha": "$2b$10$gamAMbDkg2wfmErM9PFibuZBOTFChzCaX81Lg9tvTyvnta/xGbCVe",
+    "status": "ativo",
+    "perfil": "usuario",
+    "createdAt": "2025-01-05T17:13:54.494Z",
+    "updatedAt": "2025-01-05T17:13:54.494Z",
+    "__v": 0
+  },
+  {
+    "_id": "6782fde2aaff91b76e03346b",
+    "nome": "teste5",
+    "email": "teste5@mail.com",
+    "senha": "$2b$10$72Y76KiKY/ul.dG.wSRvLudBqJVc5qqbuFiXb8uZPtA9LOx50Mmfm",
+    "status": "ativo",
+    "perfil": "usuario",
+    "createdAt": "2025-01-11T23:25:22.489Z",
+    "updatedAt": "2025-01-11T23:25:22.489Z",
+    "__v": 0
+  },
+  {
+    "_id": "67831a8b98c1235660479d75",
+    "nome": "Carvalho Silva",
+    "email": "carvalho@email.com",
+    "senha": "$2b$10$rZFfc1it/BYDCVCZH0tD7u541wobit21IBP36yUom9V7/9Cf7uZ2O",
+    "status": "ativo",
+    "perfil": "usuario",
+    "createdAt": "2025-01-12T01:27:39.062Z",
+    "updatedAt": "2025-01-12T01:27:39.062Z",
+    "__v": 0
+  }
+]

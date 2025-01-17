@@ -14,6 +14,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Importar rotas
+//const backupRoutes = require('../routes/backup');
+app.use('/backup', require('../routes/backup'));
+
 const usuarioRoutes = require('../routes/usuarios');
 app.use('/usuarios', usuarioRoutes);
 

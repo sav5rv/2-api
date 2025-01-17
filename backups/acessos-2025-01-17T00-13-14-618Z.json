@@ -1,0 +1,53 @@
+[
+  {
+    "_id": "677741d5f211bafdd0c811a4",
+    "usuarioId": "67773663b006c1c3e64e292c",
+    "sucesso": true,
+    "data": "2025-01-03T01:48:05.483Z",
+    "createdAt": "2025-01-03T01:48:05.491Z",
+    "updatedAt": "2025-01-03T01:48:05.491Z",
+    "__v": 0
+  },
+  {
+    "_id": "6777424ef211bafdd0c811a7",
+    "usuarioId": "67773663b006c1c3e64e292c",
+    "sucesso": false,
+    "data": "2025-01-03T01:50:06.765Z",
+    "createdAt": "2025-01-03T01:50:06.765Z",
+    "updatedAt": "2025-01-03T01:50:06.765Z",
+    "__v": 0
+  },
+  {
+    "_id": "67774a0293af0bf8447283c9",
+    "usuarioId": "677740061ba4472ed269b30e",
+    "sucesso": true,
+    "ip": "::ffff:127.0.0.1",
+    "maquina": "insomnia/10.3.0",
+    "data": "2025-01-03T02:22:58.416Z",
+    "createdAt": "2025-01-03T02:22:58.417Z",
+    "updatedAt": "2025-01-03T02:22:58.417Z",
+    "__v": 0
+  },
+  {
+    "_id": "67832554028df8d0776aa6f6",
+    "usuarioId": "67831a8b98c1235660479d75",
+    "sucesso": true,
+    "ip": "::ffff:127.0.0.1",
+    "maquina": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0",
+    "data": "2025-01-12T02:13:40.803Z",
+    "createdAt": "2025-01-12T02:13:40.809Z",
+    "updatedAt": "2025-01-12T02:13:40.809Z",
+    "__v": 0
+  },
+  {
+    "_id": "6783265d2a3da1592ec57e16",
+    "usuarioId": "67831a8b98c1235660479d75",
+    "sucesso": true,
+    "ip": "::ffff:127.0.0.1",
+    "maquina": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0",
+    "data": "2025-01-12T02:18:05.908Z",
+    "createdAt": "2025-01-12T02:18:05.914Z",
+    "updatedAt": "2025-01-12T02:18:05.914Z",
+    "__v": 0
+  }
+]
