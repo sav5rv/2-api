@@ -43,7 +43,7 @@ exports.cadastrarUsuario = async (req, res) => {
 exports.listarUsuarios = async (req, res) => {
   try {
     const usuarios = await Usuario.find();
-    res.status(200).json(usuarios);
+    res.status(200).json({ data:usuarios });
   } catch (err) {
     res.status(400).json({ erro: 'Erro ao listar usuários', detalhes: err.message });
   }
