@@ -9,8 +9,8 @@ const acessoContr = require('../controllers/acessoController');
 router.post('/login', acessoContr.registrarAcesso, autenticar_jwt, usuContr.login);
 
 // Rota para recuperação de senha
-router.put('/:id/senha', usuContr.trocarSenha); //Trocar a senha de um usuário
-router.post('/recuperar-senha', usuContr.recuperarSenha);
+router.put('/:id/senha', usuContr.trocarSenha);            //Trocar a senha de um usuário
+router.post('/recuperar-senha', usuContr.recuperarSenha); // Rota para recuperação de senha
 router.post('/redefinir-senha', autenticar_jwt, usuContr.redefinirSenha);
 
 // Endpoints para CRUD de usuários
