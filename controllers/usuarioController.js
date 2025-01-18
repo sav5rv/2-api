@@ -167,3 +167,18 @@ exports.redefinirSenha = async (req, res) => {
     res.status(400).json({ erro: 'Erro ao redefinir senha', detalhes: err.message });
   }
 };
+
+exports.checkEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const usuario = await Usuario.findOne({ email });
+
+    if (usuario) {
+      return res.status(200).json({ existe: true });
+    } else {
+      return res.status(404).json({ existe: false });
+    }
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao verificar e-mail', detalhes: err.message });
+  }
+};
