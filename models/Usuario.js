@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 
 // Função para obter a data e hora no fuso horário de São Paulo
 function obterDataHoraSaoPaulo() {
@@ -29,7 +29,7 @@ const usuarioSchema = new mongoose.Schema({
 usuarioSchema.pre('save', async function (next) {
   // Hash da senha se ela foi modificada
   if (!this.isModified('senha')) return next();
-  this.senha = await bcrypt.hash(this.senha, 10);
+  this.senha = await bcryptjs.hash(this.senha, 10);
   next();
 });
 

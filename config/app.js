@@ -23,8 +23,11 @@ app.use('/usuarios', usuarioRoutes);
 const acessoRoutes = require('../routes/acessos');
 app.use('/acessos', acessoRoutes);
 
-const acessoAbertura = require('../routes/abertura');
-app.use('/', acessoAbertura);
+const aberturaRoutes = require('../routes/abertura');
+app.use('/', aberturaRoutes);
+
+const patioRoutes = require('../routes/patio');
+app.use('/patio', patioRoutes);
 
 
 module.exports = app;

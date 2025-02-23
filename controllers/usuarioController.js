@@ -1,7 +1,7 @@
 require('dotenv').config();
 const Usuario = require('../models/Usuario');
 const nodemailer = require('nodemailer');
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 exports.login = async (req, res) => {
@@ -15,7 +15,7 @@ exports.login = async (req, res) => {
         }
 
         // Verificar senha
-        const senhaValida = await bcrypt.compare(senha, usuario.senha);
+        const senhaValida = await bcryptjs.compare(senha, usuario.senha);
         if (!senhaValida) {
             return res.status(401).json({ mensagem: 'Usuário ou Senha inválida.' });
         }
@@ -94,7 +94,7 @@ exports.trocarSenha = async (req, res) => {
     const usuario = await Usuario.findById(req.params.id);
     if (!usuario) return res.status(404).json({ erro: 'Usuário não encontrado' });
 
-    const senhaValida = await bcrypt.compare(senhaAtual, usuario.senha);
+    const senhaValida = await bcryptjs.compare(senhaAtual, usuario.senha);
     if (!senhaValida) return res.status(400).json({ erro: 'Senha atual incorreta' });
 
     usuario.senha = novaSenha;

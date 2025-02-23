@@ -18,8 +18,8 @@ exports.registrarAcesso = async (req, res) => {
         }
 
         // Verifica a senha
-        const bcrypt = require('bcrypt');
-        const senhaValida = await bcrypt.compare(senha, usuario.senha);
+        const bcryptjs = require('bcryptjs');
+        const senhaValida = await bcryptjs.compare(senha, usuario.senha);
         if (!senhaValida) {
         // Registra acesso sem sucesso
         await Acesso.create({ usuarioId: usuario._id, sucesso: false });
