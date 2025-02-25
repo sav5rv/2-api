@@ -10,4 +10,7 @@ router.get('/:id', patioContr.obterPatioPorId);
 router.put('/atualizar/:id', patioContr.atualizarPatio);
 router.delete('/:id', patioContr.removerPatio);
 
+// resetar o contador
+router.put('/reset-counter', patioContr.resetCounter);
+
 module.exports = router;

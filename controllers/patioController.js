@@ -4,28 +4,80 @@ const Contador = require('../models/Contador');
 // const Usuario = require('../models/Usuario');
 
 // Função para obter e incrementar o número sequencial
-async function getNextSequence(collectionName, startValue = 1) {
+async function getNextSequence(collectionName) {
   const counter = await Contador.findOneAndUpdate(
     { collectionName },
     { $inc: { sequenceValue: 1 } },  
     { new: true, upsert: true, setDefaultsOnInsert: true }
   );
 
-  return counter.sequenceValue || startValue;
+  // Se um novo contador foi criado, usa o valor inicial correto
+  if (!counter || !counter.sequenceValue) {
+    await Contador.updateOne(
+      { collectionName },
+      { $set: { sequenceValue: 1 } },
+      { upsert: true }
+    );
+    return 1;
+}
+
+  return counter.sequenceValue;
+}
+
+
+
+// Função para redefinir o contador
+exports.resetCounter = async (req, res) => {
+  try {
+    const { novoValorInicioContador = 1 } = req.body; // Novo valor inicial (padrão: 1)
+
+    if (!Number.isInteger(novoValorInicioContador) || novoValorInicioContador < 1) {
+      return res.status(400).json({ erro: 'O valor deve ser um número inteiro positivo.' });
+    }
+
+    const updatedCounter = await Counter.findOneAndUpdate(
+      { collectionName: 'Patio' },
+      { $set: { sequenceValue: novoValorInicioContador } },
+      { new: true, upsert: true }
+    );
+
+    res.json({ message: 'Contador redefinido com sucesso', updatedCounter });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
+
 
 exports.cadastrarPatio = async (req, res) => {
   try {
-    const numero = await getNextSequence('Patio', 987 ); // Inicia do 987
-    // const usuarioId = usuario._id; //estou usando igual ao acesso, mas o usuario já vai estar logado, pegar o usuario de outra forma
+    const numero = await getNextSequence('Patio'); // Obtém o próximo número sequencial automaticamente
+
+    // const usuarioId = req.user ? req.user._id : null; // Se req.user contém o ID do usuário logado, modifique assim Ajustar a obtenção do usuário logado
     const { eventoDER, numRv, situacao, dtRecolha, localPatioRecolha, numBO, marca, modelo, placa, msg, dtMovimentacao } = req.body;
-    const novoReg = new Patio({ numero, usuarioId, eventoDER, numRv, situacao, dtRecolha, localPatioRecolha, numBO, marca, modelo, placa, msg, dtMovimentacao });
+
+    const novoReg = new Patio({ 
+      numero, 
+      usuarioId, 
+      eventoDER, 
+      numRv, 
+      situacao, 
+      dtRecolha, 
+      localPatioRecolha, 
+      numBO, 
+      marca, 
+      modelo, 
+      placa, 
+      msg, 
+      dtMovimentacao 
+    });
+
     await novoReg.save();
     res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso!', patio: novoReg });
   } catch (err) {
     res.status(400).json({ erro: 'Erro ao cadastrar usuário', detalhes: err.message });
   }
 };
+
 
 exports.listarPatios = async (req, res) => {
   try {
