@@ -10,7 +10,6 @@ async function getNextSequence(collectionName) {
     { $inc: { sequenceValue: 1 } },  
     { new: true, upsert: true, setDefaultsOnInsert: true }
   );
-
   // Se um novo contador foi criado, usa o valor inicial correto
   if (!counter || !counter.sequenceValue) {
     await Contador.updateOne(
@@ -20,32 +19,43 @@ async function getNextSequence(collectionName) {
     );
     return 1;
 }
-
   return counter.sequenceValue;
-}
+};
+
+  // função para listar todos os contadores
+exports.listarContadores = async (req, res) => {
+  try {
+    const contadores = await Contador.find({}, 'collectionName sequenceValue -_id'); // Apenas os campos necessários
+    res.status(200).json(contadores);
+  } catch (error) {
+    res.status(500).json({ erro: 'Erro ao listar contadores', detalhes: error.message });
+  }
+};
+
 
 
 
 // Função para redefinir o contador
 exports.resetCounter = async (req, res) => {
   try {
-    const { novoValorInicioContador = 1 } = req.body; // Novo valor inicial (padrão: 1)
+    const { collectionName, novoValorInicioContador } = req.body;
 
-    if (!Number.isInteger(novoValorInicioContador) || novoValorInicioContador < 1) {
-      return res.status(400).json({ erro: 'O valor deve ser um número inteiro positivo.' });
+    if (!collectionName || !Number.isInteger(novoValorInicioContador) || novoValorInicioContador < 1) {
+      return res.status(400).json({ erro: 'Dados inválidos. Informe collectionName e um número inteiro positivo.' });
     }
 
-    const updatedCounter = await Counter.findOneAndUpdate(
-      { collectionName: 'Patio' },
+    const updatedCounter = await Contador.findOneAndUpdate(
+      { collectionName },
       { $set: { sequenceValue: novoValorInicioContador } },
       { new: true, upsert: true }
     );
 
-    res.json({ message: 'Contador redefinido com sucesso', updatedCounter });
+    res.json({ message: `Contador de ${collectionName} redefinido com sucesso`, updatedCounter });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 
 exports.cadastrarPatio = async (req, res) => {

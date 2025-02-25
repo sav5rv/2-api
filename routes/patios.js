@@ -13,4 +13,7 @@ router.delete('/:id', patioContr.removerPatio);
 // resetar o contador
 router.put('/reset-counter', patioContr.resetCounter);
 
+// listar contadores
+router.get('/contadores', patioContr.listarContadores);
+
 module.exports = router;
