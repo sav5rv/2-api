@@ -25,7 +25,6 @@ exports.registrarAcesso = async (req, res) => {
         await Acesso.create({ usuarioId: usuario._id, sucesso: false });
         return res.status(401).json({ erro: 'Senha incorreta' });
         }
-
         // Registra acesso com sucesso
         await Acesso.create({ usuarioId: usuario._id, sucesso: true, ip, maquina });
         

@@ -1,10 +1,25 @@
 require('dotenv').config();
 const Patio = require('../models/Patio');
+const Contador = require('../models/Contador');
+// const Usuario = require('../models/Usuario');
+
+// Função para obter e incrementar o número sequencial
+async function getNextSequence(collectionName, startValue = 1) {
+  const counter = await Contador.findOneAndUpdate(
+    { collectionName },
+    { $inc: { sequenceValue: 1 } },  
+    { new: true, upsert: true, setDefaultsOnInsert: true }
+  );
+
+  return counter.sequenceValue || startValue;
+};
 
 exports.cadastrarPatio = async (req, res) => {
   try {
-    const { usuarioId, eventoDER, numRv, situacao, dtRecolha, localPatioRecolha, numBO, marca, modelo, placa, msg, dtMovimentacao } = req.body;
-    const novoReg = new Patio({ usuarioId, eventoDER, numRv, situacao, dtRecolha, localPatioRecolha, numBO, marca, modelo, placa, msg, dtMovimentacao });
+    const numero = await getNextSequence('Patio', 987 ); // Inicia do 987
+    // const usuarioId = usuario._id; //estou usando igual ao acesso, mas o usuario já vai estar logado, pegar o usuario de outra forma
+    const { eventoDER, numRv, situacao, dtRecolha, localPatioRecolha, numBO, marca, modelo, placa, msg, dtMovimentacao } = req.body;
+    const novoReg = new Patio({ numero, usuarioId, eventoDER, numRv, situacao, dtRecolha, localPatioRecolha, numBO, marca, modelo, placa, msg, dtMovimentacao });
     await novoReg.save();
     res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso!', patio: novoReg });
   } catch (err) {

@@ -9,11 +9,11 @@ function obterDataHoraSaoPaulo() {
   return dataSaoPaulo;
 }
 
-const patioSchema = new mongoose.Schema({
+const numeradorSchema = new mongoose.Schema({
   usuarioId: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true },
   numero:    { type: Number, unique: true }, // Campo de autonumeração
-  eventoDER: { type: String, required: true },
-  numRv:     { type: String, required: true },
+  encarregado: { type: String, required: true },
+/*   numRv:     { type: String, required: true },
   situacao:  { type: String, required: false },
   dtRecolha: { type: String, required: false },
   localPatioRecolha: { type: String, required: true },
@@ -22,7 +22,7 @@ const patioSchema = new mongoose.Schema({
   modelo:    { type: String, required: false },
   placa:     { type: String, required: true },
   msg:       { type: String, required: false },
-  dtMovimentacao: { type: String, required: true },
+  dtMovimentacao: { type: String, required: true }, */
 }, {
   timestamps: {
     createdAt: 'criadoEm', //renomeia o campo createdAt
@@ -32,5 +32,5 @@ const patioSchema = new mongoose.Schema({
 }
 );
 
-const Patio = mongoose.model('Patio', patioSchema);
-module.exports = Patio;
+const Numerador = mongoose.model('Numerador', numeradorSchema);
+module.exports = Numerador;
